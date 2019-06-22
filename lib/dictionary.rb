@@ -12,10 +12,20 @@ class Dictionary
     for i in (1..30)
       dictionary[i] = []
     end
-    
+
     file_name = "dictionary.txt"
     File.foreach( file_name ) do |word|
       dictionary[word.length] << word.chop.to_s.downcase
+    end
+
+    keys = digits.chars.map{|digit|letters[digit]}
+    results = {}
+    results2 = {}
+    total_number = keys.length - 1
+    for i in (2..total_number - 2
+      first_array = keys[0..i
+      first_combination = first_array.shift.product(*first_array).map(&:join)
+
     end
 
   end
