@@ -32,19 +32,20 @@ class Dictionary
       next if first_combination.nil?
       second_combination = second_array.shift.product(*second_array).map(&:join)
       next if second_combination.nil?
+
       results[i] = [(first_combination & dictionary[i+2]), (second_combination & dictionary[total_number - i +1])]
     end
+
     for i in (0..3)
       b = [3, 3, 3]
       b[i] = 4
       first_array = keys[0..b[0]-1]
       second_array = keys[b[0]..b[0]+b[1]-1]
       third_array = keys[b[0]+b[1]..b[0]+b[1]+b[2]-1]
-      first_combination = first_array.shift.product(*first_array).map(&:join) # Get product of arrays #get_combination(first_array, dictionary)#
-      second_combination = second_array.shift.product(*second_array).map(&:join) # Get product of arrays #get_combination(first_array, dictionary)#
-      third_combination = third_array.shift.product(*third_array).map(&:join) # Get product of arrays #get_combination(first_array, dictionary)#
-      results2[i] = [(first_combination & dictionary[b[0]+1]), (second_combination & dictionary[b[1]+1]), (third_combination & dictionary[b[2]+1])] # get common values from arrays
-    end
+      first_combination = first_array.shift.product(*first_array).map(&:join)
+      second_combination = second_array.shift.product(*second_array).map(&:join)
+      third_combination = third_array.shift.product(*third_array).map(&:join)
+      results2[i] = [(first_combination & dictionary[b[0]+1]), (second_combination & dictionary[b[1]+1]), (third_combination & dictionary[b[2]+1])]
 
   end
 
