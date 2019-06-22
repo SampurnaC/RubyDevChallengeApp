@@ -1,6 +1,5 @@
 require 'pry'
 require 'date'
-require 'rails'
 class Dictionary
 
   def letter_combinations(digits)
@@ -45,10 +44,31 @@ class Dictionary
       first_combination = first_array.shift.product(*first_array).map(&:join)
       second_combination = second_array.shift.product(*second_array).map(&:join)
       third_combination = third_array.shift.product(*third_array).map(&:join)
-      results2[i] = [(first_combination & dictionary[b[0]+1]), (second_combination & dictionary[b[1]+1]), (third_combination & dictionary[b[2]+1])]
+      results2[i] = [(first_combination & dictionary[b[0]+1]), (second_combination & dictionary[b[1]+1]),(third_combination & dictionary[b[2]+1])]
+    end
 
-  end
+    final_output = []
+    results.each do |key, combinataions|
+      next if combinataions.first.nil? || combinataions.last.nil?
+      combinataions.first.product(combinataions.last).each do |combo_words|
+        final_output << combo_words
+      end
+    end
 
+    results2.each do |key, combinataions|
+      next if combinataions.first.nil? || combinataions[1].nil? || combinataions.last.nil?
+      combinataions.first.product(combinataions[1].product(combinataions.last)).each do |combo_words|
+        final_output << combo_words.flatten
+      end
+    end
+
+    final_output << (keys.shift.product(*keys).map(&:join) & dictionary[11]).join(", ") # matche with all character
+    time_end = Time.now()
+    puts "Time #{time_end.to_f - time_start.to_f}"
+    final_output
+
+    end
 end
 
-final_words = Dictionary.new().letter_combinations("2282668687")
+final_output = Dictionary.new().letter_combinations("2282668687")
+print final_output
