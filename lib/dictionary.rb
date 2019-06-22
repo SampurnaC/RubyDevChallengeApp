@@ -22,10 +22,15 @@ class Dictionary
     results = {}
     results2 = {}
     total_number = keys.length - 1
-    for i in (2..total_number - 2
-      first_array = keys[0..i
-      first_combination = first_array.shift.product(*first_array).map(&:join)
+    for i in (2..total_number - 2)
 
+      first_array = keys[0..i]
+      next if first_array.length < 3
+      second_array = keys[i + 1..total_number]
+      next if second_array.length < 3
+      first_combination = first_array.shift.product(*first_array).map(&:join)
+      next if first_combination.nil?
+      second_combination = second_array.shift.product(*second_array).map(&:join)
     end
 
   end
